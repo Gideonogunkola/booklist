@@ -1,12 +1,11 @@
 // // Define Var
-// const form = document.querySelector('.book-form'),
-//       container = document.querySelector('.container'),
-//       title = document.querySelector('#title'),
-//       author = document.querySelector('#author'),
-//       isbn = document.querySelector('#isbn'),
-//       list = document.querySelector('#book-list');
+const form = document.querySelector('#book-form'),
+      container = document.querySelector('.container'),
+      title = document.querySelector('#title'),
+      author = document.querySelector('#author'),
+      isbn = document.querySelector('#isbn'),
+      list = document.querySelector('#book-list');
 
-    //   console.log (author)
 
       //Book connstructor
       class Book{
@@ -37,11 +36,11 @@
             list.appendChild(row);    
         }
 
-        clearList(){
+        clearField(){
 
         }
 
-        showAlert(){
+        showAlert(message, className){
             //create a div
             const div = document.createElement("div");
             //give a class
@@ -61,7 +60,7 @@
 
         }
 
-        deleteBook(){
+        deleteBook(target){
             if (target.className === 'delete'){
                 target.parentElement.parentElement.remove();
             }
@@ -77,7 +76,6 @@
 
 
       // Event Listerners
-    const form = document.querySelector('.book-form');
     form.addEventListener("submit", function (e) {
     // get form values
     const title = document.getElementById("title").value;
@@ -102,9 +100,24 @@
       //show success alert
       ui.showAlert("Book added", "success")
       //clear fields
-      ui.clearList();
+      ui.clearField();
     }
   
     e.preventDefault();
   });
+
+  //Event Listener for delete
+  list.addEventListener("click", function(e){
+    //intantiate UI
+    const ui = new UI();
+
+    //delete book
+    ui.deleteBook(e.target);
+
+     //show remove alert
+     ui.showAlert("Book removed", "error");
+
+     e.preventDefault();
+
+  })
   
